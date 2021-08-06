@@ -23,7 +23,8 @@ public class App
                 "getQuantity(1, 2, 3, startTime, endTime) * 3",
                 "(v + 2) * 3 > 100 || (v / 3) != 4",
                 "(v + 2) * '3'",
-                "math.sin(0.8 + \"0x55\")"
+                "math.sin(0.8 + \"0x55\")",
+                "v - -v + 2"
         };
 
         for (String s : strings)
@@ -46,7 +47,7 @@ public class App
     static void init(FunctionElementFactory funcFactory, VariableElementFactory varFactory, ClassDictionary classDictionary)
     {
         String classQuantity = "Quantity";
-        String classSamplePoint = "SamplePoint";
+        String classSamplePointList = "SamplePointList";
         String classMath = "math";
 
         //ClassDictionary
@@ -64,7 +65,7 @@ public class App
         c.addAccept("-", Class.TYPE_NUMBER, classQuantity);
         classDictionary.add(c);
 
-        c = new Class(classSamplePoint);
+        c = new Class(classSamplePointList);
         classDictionary.add(c);
 
         c = new Class(classMath);
@@ -92,7 +93,7 @@ public class App
         params.add(new IElement.Param("结束时间", "结束时间", Class.TYPE_STRING,  null));
         params.add(new IElement.Param("分组规则", "分组规则, 值0表示全部,1表示时,2表示天,3表示月,4表示年", Class.TYPE_NUMBER,  null));
         funcFactory.registerFunctionElement("查询采集数据", "","getMeasuringValue", "根据分组查询采集数据, 当分组规则不为0时, 每个分组仅返回第一条数据",
-                params, classDictionary.arrayOf(classSamplePoint));
+                params, classDictionary.lookup(classSamplePointList));
 
         //getMeasureParamValue
         params = new ArrayList<>();

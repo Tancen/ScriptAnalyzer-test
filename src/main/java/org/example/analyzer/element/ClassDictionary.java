@@ -71,16 +71,4 @@ public class ClassDictionary
     {
         return types.get(name);
     }
-
-    public Class arrayOf(String name)
-    {
-        Class t = types.get(name);
-        if (t != null)
-        {
-            Class ret = new Class(t.name + "[]", new ArrayList<Class.Accept>());
-            return ret;
-        }
-
-        return null;
-    }
 }
